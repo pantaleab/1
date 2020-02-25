@@ -19,8 +19,11 @@
      */
     static double [] insertionSort (double a[]){
     	
+    	if ( a == null ) return null;
+    	
     	double temp;
-    	for (int i = 1; i < a.length; i++) {    	
+    	for (int i = 1; i < a.length; i++) 
+    	{    	
     		for(int j = i ; j > 0 ; j--)
     		{
     			if(a[j] < a[j-1])
@@ -31,9 +34,7 @@
 		    	}
     		}
     	}
-    	
     	return a;
-
     }//end insertionsort
 	
 	    /**
@@ -44,6 +45,8 @@
      *
      */
     static double [] selectionSort (double a[]){
+    	
+    	if ( a == null ) return null;
     	
     	int n = a.length;
     	
@@ -77,14 +80,15 @@
      */
     static double [] quickSort (double a[]){
 	
+    	if ( a == null ) return null;
+    	
     	recursiveQuick(a, 0, a.length-1);
     	return a;
 
     }
     
     private static void recursiveQuick(double[] numbers, int lo, int hi) {
-    	if(hi <= lo) 
-    		return;
+    	if (hi <= lo) return;
     	
     	int pivotPos = partition(numbers, lo, hi);
     	recursiveQuick(numbers, lo, pivotPos-1);
@@ -96,7 +100,8 @@
     	int j = hi+1;
     	double pivot = numbers[lo];
     	
-    	while(true) {
+    	while(true) 
+    	{
 	    	while((numbers[++i] < 0)) 
 	    	{
 		    	if(i == hi) 
@@ -115,15 +120,11 @@
 	    	double temp = numbers[i];
 	    	numbers[i] = numbers[j];
 	    	numbers[j] = temp;
-	    	
-	    	}
+    	}
     	numbers[lo] = numbers[j];
     	numbers[j] = pivot;
     	return j;
-    	}
-
-    
-    //end quicksort
+    	} //end quicksort
     /**
      * Sorts an array of doubles using Merge Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
@@ -139,58 +140,47 @@
      * @return after the method returns, the array must be in ascending sorted order.
      */
 
-    static double[] mergeSortIterative (double a[], int n) {
-    	  /* Iterative mergesort function to sor 
-        t arr[0...n-1] */
+    static double[] mergeSortIterative (double a[]) {
+    	 /* Iterative mergesort function to sort arr[0...n-1] */
+    	
+    	if ( a == null ) return null;
               
-            // For current size of subarrays to 
-            // be merged curr_size varies from  
-            // 1 to n/2 
-            int curr_size;  
+    	int n = a.length;
+    	// For current size of subarrays to be merged curr_size varies from 1 to n/2 
+        int curr_size;  
+                      
+        // For picking starting index of left subarray to be merged 
+        int left_start; 
                           
-            // For picking starting index of  
-            // left subarray to be merged 
-            int left_start; 
-                              
+          
+        // Merge subarrays in bottom up manner. 
+        // First merge subarrays of size 1 to create sorted subarrays of size 2, 
+        // then merge subarrays of size 2 to create sorted subarrays of size 4,  
+        // and so on. 
+        for (curr_size = 1; curr_size <= n-1; curr_size = 2*curr_size) 
+        { 
               
-            // Merge subarrays in bottom up  
-            // manner. First merge subarrays  
-            // of size 1 to create sorted  
-            // subarrays of size 2, then merge 
-            // subarrays of size 2 to create  
-            // sorted subarrays of size 4, and 
-            // so on. 
-            for (curr_size = 1; curr_size <= n-1;  
-                          curr_size = 2*curr_size) 
+            // Pick starting point of different subarrays of current size 
+            for (left_start = 0; left_start < n-1; 
+                        left_start += 2*curr_size) 
             { 
-                  
-                // Pick starting point of different 
-                // subarrays of current size 
-                for (left_start = 0; left_start < n-1; 
-                            left_start += 2*curr_size) 
-                { 
-                    // Find ending point of left  
-                    // subarray. mid+1 is starting  
-                    // point of right 
-                    int mid = Math.min(left_start + curr_size - 1, n-1); 
-              
-                    int right_end = Math.min(left_start  
-                                 + 2*curr_size - 1, n-1); 
-              
-                    // Merge Subarrays arr[left_start...mid] 
-                    // & arr[mid+1...right_end] 
-                    merge(a, left_start, mid, right_end); 
-                } 
+                // Find ending point of left subarray. mid+1 is starting point of right 
+                int mid = Math.min(left_start + curr_size - 1, n-1); 
+          
+                int right_end = Math.min(left_start  
+                             + 2*curr_size - 1, n-1); 
+          
+                // Merge Subarrays arr[left_start...mid] & arr[mid+1...right_end] 
+                merge(a, left_start, mid, right_end); 
             } 
-            
-            return a;
+        } 
+        
+        return a;
         
     }
     
-    /* Function to merge the two haves arr[l..m] and 
-    arr[m+1..r] of array arr[] */
-    static void merge(double arr[], int l, int m, int r) 
-    { 
+    /* Function to merge the two haves arr[l..m] and arr[m+1..r] of array arr[] */
+    static void merge(double arr[], int l, int m, int r) { 
         int i, j, k; 
         int n1 = m - l + 1; 
         int n2 = r - m; 
@@ -199,15 +189,13 @@
         double L[] = new double[n1]; 
         double R[] = new double[n2]; 
       
-        /* Copy data to temp arrays L[] 
-        and R[] */
+        /* Copy data to temp arrays L[] and R[] */
         for (i = 0; i < n1; i++) 
             L[i] = arr[l + i]; 
         for (j = 0; j < n2; j++) 
             R[j] = arr[m + 1+ j]; 
       
-        /* Merge the temp arrays back into 
-        arr[l..r]*/
+        /* Merge the temp arrays back into arr[l..r]*/
         i = 0; 
         j = 0; 
         k = l; 
@@ -226,8 +214,7 @@
             k++; 
         } 
       
-        /* Copy the remaining elements of  
-        L[], if there are any */
+        /* Copy the remaining elements of L[], if there are any */
         while (i < n1) 
         { 
             arr[k] = L[i]; 
@@ -235,20 +222,14 @@
             k++; 
         } 
       
-        /* Copy the remaining elements of 
-        R[], if there are any */
+        /* Copy the remaining elements of R[], if there are any */
         while (j < n2) 
         { 
             arr[k] = R[j]; 
             j++; 
             k++; 
         } 
-    } 
-    	
-    	  
-    //end mergesortIterative
-    
-    
+    } //end mergesortIterative
     
     /**
      * Sorts an array of doubles using recursive implementation of Merge Sort.
@@ -257,68 +238,66 @@
      * @param a: An unsorted array of doubles.
      * @return after the method returns, the array must be in ascending sorted order.
      */
-    static double[] mergeSortRecursive (double array[]) {
-    	if(array == null)
-            return array; 
+    static double[] mergeSortRecursive (double a[]) {
+    	
+    	if(a == null)
+            return null; 
   
-        if(array.length > 1) 
+        int mid = a.length / 2; 
+        
+        // Split left part 
+        double[] left = new double[mid]; 
+        for(int i = 0; i < mid; i++) 
         { 
-            int mid = array.length / 2; 
-  
-            // Split left part 
-            double[] left = new double[mid]; 
-            for(int i = 0; i < mid; i++) 
-            { 
-                left[i] = array[i]; 
-            } 
-              
-            // Split right part 
-            double[] right = new double[array.length - mid]; 
-            for(int i = mid; i < array.length; i++) 
-            { 
-                right[i - mid] = array[i]; 
-            } 
-            mergeSortRecursive(left); 
-            mergeSortRecursive(right); 
-  
-            int i = 0; 
-            int j = 0; 
-            int k = 0; 
-  
-            // Merge left and right arrays 
-            while(i < left.length && j < right.length) 
-            { 
-                if(left[i] < right[j]) 
-                { 
-                    array[k] = left[i]; 
-                    i++; 
-                } 
-                else
-                { 
-                    array[k] = right[j]; 
-                    j++; 
-                } 
-                k++; 
-            } 
-            // Collect remaining elements 
-            while(i < left.length) 
-            { 
-                array[k] = left[i]; 
-                i++; 
-                k++; 
-            } 
-            while(j < right.length) 
-            { 
-                array[k] = right[j]; 
-                j++; 
-                k++; 
-            } 
+            left[i] = a[i]; 
         } 
-        return array;
+          
+        // Split right part 
+        double[] right = new double[a.length - mid]; 
+        for(int i = mid; i < a.length; i++) 
+        { 
+            right[i - mid] = a[i]; 
+        } 
+        mergeSortRecursive(left); 
+        mergeSortRecursive(right); 
+
+        int i = 0; 
+        int j = 0; 
+        int k = 0; 
+
+        // Merge left and right arrays 
+        while(i < left.length && j < right.length) 
+        { 
+            if(left[i] < right[j]) 
+            { 
+                a[k] = left[i]; 
+                i++; 
+            } 
+            else
+            { 
+                a[k] = right[j]; 
+                j++; 
+            } 
+            k++; 
+        } 
+        
+        // Collect remaining elements 
+        while(i < left.length) 
+        { 
+            a[k] = left[i]; 
+            i++; 
+            k++; 
+        } 
+        while(j < right.length) 
+        { 
+            a[k] = right[j]; 
+            j++; 
+            k++; 
+        } 
+        return a;
     }
     
-    private static void merge(double[] a, double[] l, double[] r, int left, int right) 
-	{
+    private static void merge(double[] a, double[] l, double[] r, int left, int right) {
 		 
 		int i = 0, j = 0, k = 0;
 		while (i < left && j < right) 
