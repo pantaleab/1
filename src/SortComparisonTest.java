@@ -1,6 +1,9 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner; 
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +15,29 @@ import org.junit.runners.JUnit4;
  *
  *  @author Abigail Pantaleon
  *  @version HT 2020
+ *  
+ *  Times in milliseconds
+ *  						Insert 	Selection 	Merge Recursive 	Merge Iterative 	Quick
+	10 random			|	0	  |	  0		  |	 0				|	0				|	0
+	100 random			|	1	  |	  1		  |  0				|	0				|	1
+	1000 random			|	9	  |	  6		  |  6				|	1				|	8
+	1000 few unique		|	2	  |	  1		  |  3				|	0				|	7
+	1000 nearly ordered	|	0	  |	  1		  |  3				|	0				|	8
+	1000 reverse order	|	1	  |	  0		  |  2				|	0				|	0
+	1000 sorted			|	1 	  |	  0		  |  2				|	1				|	0
+	
+	a. Which of the sorting algorithms does the order of input have an impact on? Why?
+	
+	b. Which algorithm has the biggest difference between the best and worst performance, based
+	on the type of input, for the input of size 1000? Why?
+	
+	c. Which algorithm has the best/worst scalability, i.e., the difference in performance time
+	based on the input size? Please consider only input files with random order for this answer.
+	
+	d. Did you observe any difference between iterative and recursive implementations of merge
+	sort?
+	
+	e. Which algorithm is the fastest for each of the 7 input files?
  */
 @RunWith(JUnit4.class)
 public class SortComparisonTest
@@ -125,9 +151,100 @@ public class SortComparisonTest
      *  Use this main method to create the experiments needed to answer the experimental performance questions of this assignment.
      *
      */
-    public static void main(String[] args)
+    
+    public static void main(String[] args) throws FileNotFoundException
     {
+    	File numbers10 = new File("C:\\Users\\Abby\\Desktop\\numbers\\numbers10.txt");
+    	double[] numbers10List = fileToList(numbers10, 10);
+    	System.out.println("Numbers 10 list");
+    	algorithmsStopwatch(numbers10List);
+    	
+    	
+    	File numbers100 = new File("C:\\Users\\Abby\\Desktop\\numbers\\numbers100.txt");
+    	double[] numbers100List = fileToList(numbers100, 100);
+    	System.out.println("Numbers 100 list");
+    	algorithmsStopwatch(numbers100List);
+    	
+    	File numbers1000 = new File("C:\\Users\\Abby\\Desktop\\numbers\\numbers1000.txt");
+    	double[] numbers1000List = fileToList(numbers1000, 1000);
+    	System.out.println("Numbers 1000 list");
+    	algorithmsStopwatch(numbers1000List);
+    	
+    	File numbers1000Duplicates = new File("C:\\Users\\Abby\\Desktop\\numbers\\numbers1000Duplicates.txt");
+    	double[] numbers1000DuplicatesList = fileToList(numbers1000Duplicates, 1000);
+    	System.out.println("Numbers 1000 Duplicates list");
+    	algorithmsStopwatch(numbers1000DuplicatesList);
+    	
+    	File numbersNearlyOrdered1000 = new File("C:\\Users\\Abby\\Desktop\\numbers\\numbersNearlyOrdered1000.txt");
+    	double[] numbersNearlyOrdered1000List = fileToList(numbersNearlyOrdered1000, 1000);
+    	System.out.println("Numbers Nearly Ordered 1000 list");
+    	algorithmsStopwatch(numbersNearlyOrdered1000List);
+    	
+    	File numbersReverse1000 = new File("C:\\Users\\Abby\\Desktop\\numbers\\numbersReverse1000.txt");
+    	double[] numbersReverse1000List = fileToList(numbersReverse1000, 1000);
+    	System.out.println("Numbers Reverse 1000 list");
+    	algorithmsStopwatch(numbersReverse1000List);
+    	
+    	File numbersSorted1000 = new File("C:\\Users\\Abby\\Desktop\\numbers\\numbersSorted1000.txt");
+    	double[] numbersSorted1000List = fileToList(numbersSorted1000, 1000);
+    	System.out.println("Numbers Sorted 1000 list");
+    	algorithmsStopwatch(numbersSorted1000List);
+    	
         //TODO: implement this method
+    }
+    
+    public static double[] fileToList( File inputFile, int length )throws FileNotFoundException
+    {
+    	Scanner sc = new Scanner(inputFile); 
+    	double[] list = new double[length];
+
+    	for (int i = 0; i < length; i++ ) 
+    		list[i] = new Double (sc.nextLine());
+    	
+    	return list;
+    }
+    
+    public static void algorithmsStopwatch( double[] list  )
+    {
+    	final double[] originalList = list;
+    	long startTime = System.currentTimeMillis();
+    	SortComparison.insertionSort(list);
+    	long endTime = System.currentTimeMillis();
+    	long timeTaken = endTime - startTime;
+    	
+    	System.out.println("Time for insertion sort: " + timeTaken + "ms");
+    	
+    	list = originalList;
+    	startTime = System.currentTimeMillis();
+    	SortComparison.selectionSort(list);
+    	endTime = System.currentTimeMillis();
+    	timeTaken = endTime - startTime;
+    	
+    	System.out.println("Time for selection sort: " + timeTaken + "ms");
+
+    	list = originalList;
+    	startTime = System.currentTimeMillis();
+    	SortComparison.quickSort(list);
+    	endTime = System.currentTimeMillis();
+    	timeTaken = endTime - startTime;
+    	
+    	System.out.println("Time for quick sort: " + timeTaken + "ms");
+
+    	list = originalList;
+    	startTime = System.currentTimeMillis();
+    	SortComparison.mergeSortIterative(list);
+    	endTime = System.currentTimeMillis();
+    	timeTaken = endTime - startTime;
+    	
+    	System.out.println("Time for merge sort iterative sort: " + timeTaken + "ms");
+
+    	list = originalList;
+    	startTime = System.currentTimeMillis();
+    	SortComparison.mergeSortRecursive(list);
+    	endTime = System.currentTimeMillis();
+    	timeTaken = endTime - startTime;
+    	
+    	System.out.println("Time for merge sort recursive sort: " + timeTaken + "ms");
     }
 
 }

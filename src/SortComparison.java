@@ -257,7 +257,7 @@
     
     private static void doMerge(double [] a, int left, int mid, int right)
     {
-    	double [] temp = new double[25];
+    	double [] temp = new double[1000];
     	int i, left_end, num_elements, tmp_pos;
     	left_end = (mid - 1);
     	tmp_pos = left;
@@ -286,9 +286,5 @@
     //todo: implement the sort
 	
    //end mergeSortRecursive
-    public static void main(String[] args) {
-
-        //todo: do experiments as per assignment instructions
-    }
 
  }//end class
