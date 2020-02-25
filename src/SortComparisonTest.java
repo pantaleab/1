@@ -1,4 +1,6 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +10,7 @@ import org.junit.runners.JUnit4;
 /**
  *  Test class for SortComparison.java
  *
- *  @author
+ *  @author Abigail Pantaleon
  *  @version HT 2020
  */
 @RunWith(JUnit4.class)
@@ -43,6 +45,7 @@ public class SortComparisonTest
     // TODO: add more tests here. Each line of code and ech decision in Collinear.java should
     // be executed at least once from at least one test.
     
+    @Test
     public void testInsertionSort()
     {
     	double[] list = {1};
@@ -54,9 +57,10 @@ public class SortComparisonTest
     	double[] sortedList = list;
     	
     	list = new double[] {4,2,4,1,3};
-    	assertEquals("Check insertion sort with unsorted list", sortedList, SortComparison.insertionSort(list) );
+    	assertArrayEquals("Check insertion sort with unsorted list", sortedList, SortComparison.insertionSort(list), 0 );
     }
     
+    @Test
     public void testSelectionSort()
     {
     	double[] list = {1};
@@ -65,13 +69,12 @@ public class SortComparisonTest
     	list = new double[] {1,2,3,4,4};
     	assertEquals("Check selection sort with already sorted list", list, SortComparison.selectionSort(list) );
     	
-    	double[] sortedList = list;
-    	
     	list = new double[] {4,2,4,1,3};
-    	assertEquals("Check selection sort with unsorted list", sortedList, SortComparison.selectionSort(list) );
+    	assertArrayEquals("Check selection sort with unsorted list", new double[]{1,2,3,4,4}, SortComparison.selectionSort(list), 0 );
     	
     }
     
+    @Test
     public void testQuickSort()
     {
     	double[] list = {1};
@@ -83,9 +86,10 @@ public class SortComparisonTest
     	double[] sortedList = list;
     	
     	list = new double[] {4,2,4,1,3};
-    	assertEquals("Check quick sort with unsorted list", sortedList, SortComparison.quickSort(list) );
+    	assertArrayEquals("Check quick sort with unsorted list", sortedList, SortComparison.quickSort(list), 0 );
     }
     
+    @Test
     public void testMergeSortIterative()
     {
     	double[] list = {1};
@@ -97,9 +101,10 @@ public class SortComparisonTest
     	double[] sortedList = list;
     	
     	list = new double[] {4,2,4,1,3};
-    	assertEquals("Check iterative merge sort with unsorted list", sortedList, SortComparison.mergeSortIterative(list) );
+    	assertArrayEquals("Check iterative merge sort with unsorted list", sortedList, SortComparison.mergeSortIterative(list), 0 );
     }
     
+    @Test
     public void testMergeSortRecursive()
     {
     	double[] list = {1};
@@ -111,7 +116,7 @@ public class SortComparisonTest
     	double[] sortedList = list;
     	
     	list = new double[] {4,2,4,1,3};
-    	assertEquals("Check recursive merge sort with unsorted list", sortedList, SortComparison.mergeSortRecursive(list) );
+    	assertArrayEquals("Check recursive merge sort with unsorted list", sortedList, SortComparison.mergeSortRecursive(list), 0 );
     }
 
     // ----------------------------------------------------------
