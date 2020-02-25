@@ -1,9 +1,12 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner; 
+=======
+>>>>>>> 10c4063420121e003556e10db916813dc4d09af1
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

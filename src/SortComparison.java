@@ -257,7 +257,11 @@
     
     private static void doMerge(double [] a, int left, int mid, int right)
     {
+<<<<<<< HEAD
     	double [] temp = new double[1000];
+=======
+    	double [] temp = new double[25];
+>>>>>>> 10c4063420121e003556e10db916813dc4d09af1
     	int i, left_end, num_elements, tmp_pos;
     	left_end = (mid - 1);
     	tmp_pos = left;
