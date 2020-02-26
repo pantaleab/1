@@ -1,12 +1,9 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner; 
-=======
->>>>>>> 10c4063420121e003556e10db916813dc4d09af1
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,17 +27,22 @@ import org.junit.runners.JUnit4;
 	1000 sorted			|	1 	  |	  0		  |  2				|	1				|	0
 	
 	a. Which of the sorting algorithms does the order of input have an impact on? Why?
+	Quick sort and insertion sort because it only swaps unsorted inputs, therefore the more sorted it is, the faster and vice versa.
 	
 	b. Which algorithm has the biggest difference between the best and worst performance, based
 	on the type of input, for the input of size 1000? Why?
+	Quick sort and insertion sort for the sane reasons as question a.
 	
 	c. Which algorithm has the best/worst scalability, i.e., the difference in performance time
 	based on the input size? Please consider only input files with random order for this answer.
+	Insertion sort.
 	
 	d. Did you observe any difference between iterative and recursive implementations of merge
 	sort?
+	In this implementation, merge sort iterative was faster or same in all cases than recursive. 
 	
 	e. Which algorithm is the fastest for each of the 7 input files?
+	In this case, merge sort iterative. But in general it would be merge sort recursive. 
  */
 @RunWith(JUnit4.class)
 public class SortComparisonTest
